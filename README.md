@@ -1,72 +1,105 @@
 # ☕ React Native - Cafeteria App
 
-Aplicativo mobile desenvolvido em **React Native (Expo)** para a disciplina **Programação para Dispositivos Móveis**, do curso de **Análise e Desenvolvimento de Sistemas (ESTÁCIO)**.  
-O projeto faz parte do portfólio pessoal de estudos e demonstra a evolução prática na construção de um app completo — desde a estrutura base até as telas interativas e navegação.
+Este repositório reúne o projeto acadêmico desenvolvido para a disciplina **Programação para Dispositivos Móveis**, do curso de **Análise e Desenvolvimento de Sistemas (Estácio)**.  
+O aplicativo foi construído em **React Native (Expo)** e faz parte do meu **portfólio prático**, demonstrando a evolução do aprendizado e da aplicação dos conceitos de desenvolvimento mobile.
 
 ---
 
-## 📍 Situação atual do projeto
-🔹 Estrutura base do app criada  
-🔹 Tela de **Login** funcional (com campos de email e senha, botão de entrada e validação simples)  
-🔹 Início da criação de **componentes reutilizáveis** (`Input` com ícones e título dinâmico)  
-🔹 Em desenvolvimento: **transição entre páginas** e navegação entre telas interativas
+## 📚 Conteúdos Desenvolvidos
 
-> 🔧 Projeto ainda em fase de construção.  
-> Este repositório será atualizado conforme o desenvolvimento evoluir.
+### 🏗️ Estrutura Base do Projeto
+- [x] Configuração do ambiente com Expo  
+- [x] Estruturação das pastas (`src`, `assets`, `components`, `screens`)  
+- [x] Definição de temas globais e cores (arquivo `themes.ts`)  
 
 ---
 
-## 🧠 Tecnologias utilizadas
+### 🔐 Tela de Login
+- [x] Criação da tela base com campos de **email** e **senha**  
+- [x] Implementação do componente reutilizável **Input** (com ícones e título dinâmico)  
+- [x] Adição de botão **“Entrar”** com carregamento e validação simples  
+- [x] Feedback visual e mensagens de alerta para campos vazios  
+
+---
+
+### ⚙️ Estrutura de Componentes
+- [x] `Input`: componente genérico com ícones à esquerda/direita  
+- [x] Estilização utilizando `StyleSheet` e temas globais  
+- [x] Organização em pastas modulares  
+
+---
+
+### 🔄 Navegação e Telas Interativas (em andamento)
+- [x] Criação inicial das rotas  
+- [ ] Implementação completa da **transição entre páginas**  
+- [ ] Organização da navegação principal (`BottomRoutes` / `IndexRoutes`)  
+- [ ] Integração de ícones e cabeçalhos personalizados nas rotas  
+
+---
+
+### 🧠 Tecnologias Utilizadas
 - React Native (Expo)
 - TypeScript
-- React Navigation (em implementação)
-- Components reutilizáveis e estilização com StyleSheet
+- React Navigation
 - Hooks (`useState`)
-- Ícones do pacote `@expo/vector-icons`
+- `@expo/vector-icons`  
+- StyleSheet (estilização nativa do React Native)
 
 ---
 
-## 🧭 Estrutura atual de diretórios
-
+## 🧭 Estrutura de Diretórios
+```
 src/
-├── components/
-│ └── input/
-│ ├── index.tsx
-│ └── styles.ts
-├── screens/
-│ └── Login/
-│ ├── index.tsx
-│ └── styles.ts
-├── global/
-│ └── themes.ts
+ ├── components/
+ │     └── input/
+ │          ├── index.tsx
+ │          └── styles.ts
+ ├── screens/
+ │     └── Login/
+ │          ├── index.tsx
+ │          └── styles.ts
+ ├── global/
+ │     └── themes.ts
 assets/
-└── logo.png
-
+ └── logo.png
+```
 
 ---
 
-## 🚀 Como executar o projeto localmente
-
-```bash
-# 1. Instalar dependências
+## 🚀 Como Executar o Projeto
+```
+# 1️⃣ Instalar dependências
 npm install
 
-# 2. Iniciar o projeto no Terminal
+# 2️⃣ Iniciar o projeto no Terminal
 npx expo start
 
-# 3. Iniciar o projeto no Expo Go
-Abra o app **Expo Go** no celular e escaneie o QR Code gerado no terminal.
+```
+
+> Abra o aplicativo **Expo Go** no celular e escaneie o QR Code exibido no terminal.
 
 ---
 
-## 📆 Linha do tempo (evolução prevista)
+## 📆 Linha do Tempo do Desenvolvimento
+
 | Etapa | Descrição | Status |
 |-------|------------|--------|
-| 1️⃣ Estrutura base do app | Criação do ambiente e organização de pastas | ✅ Concluída |
-| 2️⃣ Tela de Login | Campos dinâmicos e componente Input | ✅ Concluída |
-| 3️⃣ Navegação entre telas | Criação de rotas e transições | 🔄 Em andamento |
-| 4️⃣ Integração de dados | Armazenamento local e simulação de carrinho | ⏳ A planejar |
-| 5️⃣ Publicação final | README completo e screenshots | ⏳ A planejar |
+| 🧱 **v0.1.0** | Estrutura base do app | ✅ Concluída |
+| 🔐 **v0.2.0** | Tela de login com componente Input | ✅ Concluída |
+| 🔄 **v0.3.0** | Navegação entre telas e transições | 🚧 Em andamento |
+| 🗃️ **v0.4.0** | Integração de dados e carrinho | ⏳ A planejar |
+| 📱 **v1.0.0** | Publicação final e README completo | ⏳ A planejar |
+
+---
+
+## 📦 Objetivo do Projeto
+Este aplicativo simula uma **cafeteria mobile**, permitindo explorar conceitos de:
+- Componentização e reutilização de código  
+- Navegação e rotas no React Native  
+- Gerenciamento de estado  
+- Boas práticas de estilização e organização  
+
+O foco principal é o **aprendizado progressivo**, com commits e versões que contam a **história de evolução do código**.
 
 ---
 
