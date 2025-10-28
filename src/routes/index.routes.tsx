@@ -4,7 +4,7 @@ import Login from "../pages/login";
 import BottomRoutes from "./bottom.routes";
 
 export default function Routes(){
-    const Stack = createStackNavigator()
+    const Stack:any = createStackNavigator();   //any adicionado.
 
     return (
         <Stack.Navigator
@@ -12,7 +12,7 @@ export default function Routes(){
             screenOptions={{
                 headerShown: false,
                 cardStyle:{
-                    backgroundColor:"#FFF"
+                    backgroundColor:"#4B2E2B"           // COR DA TELA
                 }
             }}
         >    

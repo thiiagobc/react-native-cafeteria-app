@@ -4,6 +4,9 @@ export const themas = {
         secondary:'#ffffff',
         ligthGray:'#d7d8d7',
         gray:'gray',
-        bgScreen:'#f1f7fa'
+        bgScreen:'#f1f7fa',
+        red:'#FF494C',
+        blueLigth:'#87CEF6',
+        transparent:'rgba(0, 0, 0, 0.5)'
     }
 }

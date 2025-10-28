@@ -1,12 +1,20 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import List from '../pages/list';
 import User from '../pages/user';
+import CustomTabBar from '../components/CustomTabBar';
+import { AuthProviderList } from '../context/authContext_list';
 
-const Tab = createBottomTabNavigator();
+const Tab:any = createBottomTabNavigator();   //any adicionado.
 
 export default function BottomRoutes(){
   return (
-    <Tab.Navigator>
+    <AuthProviderList>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown:false
+      }}
+      tabBar={props=><CustomTabBar {...props}/>}
+    >
       <Tab.Screen 
         name="List" 
         component={List} 
@@ -16,5 +24,7 @@ export default function BottomRoutes(){
         component={User}
     />
     </Tab.Navigator>
+
+    </AuthProviderList>
   );
 }

@@ -6,30 +6,38 @@ import {MaterialIcons, Octicons} from '@expo/vector-icons';
 import { themas } from "../../global/themes";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import Routes from "../../routes/index.routes";
+
 
 
 export default function Login (){
 
+        const navigation = useNavigation<NavigationProp<any>>();
 
         const [email,setEmail] = useState('');
         const [password,setPassword] = useState('');
         const [showPassword, setShowPassword] = useState(true);
         const [loading,setLoading] = useState(false)
 
+
         async function getLogin(){
-            setLoading(true)
             try {
+                setLoading(true)
                 
                 if (!email || !password){
                     return Alert.alert('Atenção', 'Informe os campos obrigatórios!')
                 }
 
+                navigation.reset({routes:[{name:"BottomRoutes"}]})
+
                 console.log('LOGOU!')
 
             } catch (error) {
                 console.log(error)  
+            } finally{
+                setLoading(false)
             }
-            setLoading(false)
         }
     return(
         <View style={style.container}>
