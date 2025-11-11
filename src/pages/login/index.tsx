@@ -1,4 +1,4 @@
-import React, { useState } from"react";
+import React, { useState } from "react";
 import {Text, View, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import { style } from "./styles";
 import Logo from '../../assets/logo.png'
@@ -47,7 +47,7 @@ export default function Login (){
                     style={style.logo}
                     resizeMode="contain"
                 />
-                <Text style={style.text}>Bem vindo de volta!</Text>
+                <Text style={style.text}></Text>
             </View>
             <View style={style.boxMid}> 
                 <Input 
@@ -69,8 +69,13 @@ export default function Login (){
             </View>
             <View style={style.boxBottom}>
                 <Button
-                    text="ENTRAR" loading={loading} onPress={()=>getLogin()}/>
+                    text="ENTRAR" 
+                    loading={loading} 
+                    onPress={()=>getLogin()}
+                />
+                
             </View>
+            <Text style={style.textBottom}>Esqueceu sua senha? <Text style={{color:themas.colors.primary}}>Clique Aqui!</Text></Text>
             <Text style={style.textBottom}>Não tem conta? <Text style={{color:themas.colors.primary}}>Crie agora!</Text></Text>
         </View>
     )
