@@ -1,48 +1,63 @@
-import React from "react";
-
-import {Text, TouchableOpacity, View} from 'react-native'
+import React,{ useState, useContext,useRef } from "react";
 import { style } from "./styles";
-import { Input } from "../../components/Input";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FlatList } from "react-native-gesture-handler";
 import { Ball } from "../../components/Ball";
+import { Input } from "../../components/Input";
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { themas } from "../../global/themes";
+import { AuthContextList } from "../../context/authContext_list";
+import { Text, TouchableOpacity, View, FlatList} from 'react-native'
+import { AuthContextType, PropCard } from "../../global/Props";
+import { Directions, Swipeable} from 'react-native-gesture-handler';
 
-type PropCard = {
-    item:number,
-    title:string,
-    description:string,
-    flag:'urgente'|'opcional'
-}
-
-const data:Array<PropCard> = 
-[
-        {
-            item:0,
-            title: 'Café simples!',
-            description: '',
-            flag:'urgente'
-        },
-        {
-            item:1,
-            title:'Café expresso!',
-            description:'',
-            flag:'urgente'
-            },
-        {
-            item:2,
-            title:'Cappucino!',
-            description:'',
-            flag:'urgente'
-        }
-
-    ]
 
 export default function List (){
 
-    
-    const _renderCard = (item:PropCard)=>{
+    const {taskList, handleDelete, handleEdit}   = useContext<AuthContextType>(AuthContextList)
+    const swipeableRefs = useRef([]);
+
+    const renderRightActions = () =>{
+       return(
+        <View style={style.button}>
+                <AntDesign
+                    name="delete"
+                    size={20}
+                    color={'#FFF'}
+                />
+            </View>
+        )
+    }
+
+    const renderLeftActions = () =>{
+       return(
+        <View style={[style.button,{backgroundColor:themas.colors.blueLigth}]}>
+                <AntDesign
+                    name="edit"
+                    size={20}
+                    color={'#FFF'}
+                />
+            </View>
+        )
+    };
+
+    const handleSwipeOpen = (directions:'right' | 'left',item,index) => {
+        if(directions == 'right'){
+            handleDelete(item)
+        } else {
+            handleEdit(item)
+        }
+        swipeableRefs.current[index]?.close()
+    }
+
+    const _renderCard = (item:PropCard,index)=>{
         return(
-            <TouchableOpacity style={style.card}>
+            <Swipeable
+                ref={(ref) => {swipeableRefs.current[index] = ref}}
+                key={index}
+                renderRightActions={renderRightActions}
+                renderLeftActions={renderLeftActions}
+                onSwipeableOpen={(directions)=>handleSwipeOpen(directions,item,index)}            
+                >
+            <View style={style.card}>
                 <View style={style.rowCard}>
                     <View style={style.rowCardLeft}>
                     <Ball color="red"/>                
@@ -50,11 +65,11 @@ export default function List (){
                         <Text>{item.title}</Text>
                         <Text>{item.description}</Text>
                     </View>
-
                     </View>
                     {/* <Flag /> */}
                 </View>
-            </TouchableOpacity>
+            </View>
+            </Swipeable>
         )
     }
 
@@ -71,10 +86,10 @@ export default function List (){
             </View>
             <View style={style.boxList}>
                 <FlatList
-                    data={data}
+                    data={taskList}
                     style={{marginTop:40,paddingHorizontal:30}}
                     keyExtractor={(item,index)=>item.item.toString()}
-                    renderItem={({item,index})=>{return (_renderCard(item))}}
+                    renderItem={({item,index})=>{return (_renderCard(item,index))}}
                 />
             </View>
         </View>

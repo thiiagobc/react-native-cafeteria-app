@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Alert, Dimensions, Text, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
+import { Input } from "../components/Input";
+import { themas } from "../global/themes";
 import {Modalize} from 'react-native-modalize';
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { Input } from "../components/Input";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import CustomDateTimerPicker from "../components/CustomDateTimePicker";
+import { Alert, Dimensions, Text, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
+import { PropCard } from "../global/Props";
+
 
 export const AuthContextList:any = createContext({});
 
@@ -16,6 +20,9 @@ export const AuthProviderList = (props:any):any =>{
     const [selectedTime, setSelectedTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
+    const [item,setItem] = useState(0);
+    const [taskList,setTaskList] = useState([])
+
 
     const onOpen = ()=>{
         modalizeRef?.current.open()
@@ -26,7 +33,7 @@ export const AuthProviderList = (props:any):any =>{
     }
 
     useEffect(()=>{
-        onOpen()
+        get_taskList()
     },[])
 
     const handleDateChange = (date) => {
@@ -36,6 +43,97 @@ export const AuthProviderList = (props:any):any =>{
     const handleTimeChange = (date) => {
         setSelectedTime(date)
     };
+
+    const handleSave = async() =>{         // PARA O USUARIO PREENCHER OS CAMPOS DENTRO DO MODAL
+            if(!title || !description){
+                return Alert.alert('Atenção', 'Preencha os campos corretamente')
+            }
+            try {
+                const newItem = {
+                    item:item !== 0?item:Date.now(),
+                    title,
+                    description,
+                    timeLimite:new Date(
+                        selectedDate.getFullYear(),
+                        selectedDate.getMonth(),
+                        selectedDate.getDate(),
+                        selectedDate.getHours(),
+                        selectedTime.getMinutes()
+                    ).toISOString(),
+                }
+
+
+                const storageData = await AsyncStorage.getItem('taskList');
+                let taskList:Array<any> = storageData ? JSON.parse(storageData):[];
+
+                const itemIndex = taskList.findIndex((task)=>task.item === newItem.item)
+
+                if(itemIndex >= 0){
+                    taskList[itemIndex] = newItem
+                } else {
+                    taskList.push(newItem)
+                }
+                
+                await AsyncStorage.setItem('taskList',JSON.stringify(taskList))
+
+                setTaskList(taskList)
+                setData()
+                onClose()
+                
+            } catch (error) {
+                console.log("Erro ao salvar o item:",error)
+            }
+        
+    }
+
+    const setData = ()=>{
+        setTitle('')
+        setDescription('')
+        setItem(0)
+        setSelectedDate(new Date());
+        setSelectedTime(new Date());
+    }
+
+    async function get_taskList() {
+    try {
+        const storageData = await AsyncStorage.getItem('taskList');
+        const taskList = storageData ? JSON.parse(storageData):[]
+        setTaskList(taskList)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+    const handleDelete = async (itemToDelete)=>{
+        try {
+            const storageData = await AsyncStorage.getItem('taskList')
+            const taskList:Array<any> = storageData ? JSON.parse(storageData):[]
+
+            const updatedTaskList = taskList.filter(item=>item.item !== itemToDelete.item)
+
+            await AsyncStorage.setItem('taskList',JSON.stringify(updatedTaskList))
+            setTaskList(updatedTaskList)
+
+        } catch (error) {
+            console.log('Erro ao excluir o item', error)
+        }
+    }
+
+    const handleEdit = async (itemToEdit:PropCard)=>{ 
+        try {
+            setTitle(itemToEdit.title)
+            setDescription(itemToEdit.description)
+            setItem(itemToEdit.item)
+
+            const timeLimit = new Date(itemToEdit.timeLimit);
+            setSelectedDate(timeLimit);
+            setSelectedTime(timeLimit);
+
+            onOpen()
+        } catch (error) {
+            console.log('Erro ao editar')
+        }
+    }
 
     const _container = () =>{
         return (
@@ -52,7 +150,7 @@ export const AuthProviderList = (props:any):any =>{
                             />
                         </TouchableOpacity>
                         <Text style={styles.title}>Criar tarefa</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>handleSave()}>
                             <AntDesign
                                 name="check"
                                 size={30}
@@ -122,7 +220,7 @@ export const AuthProviderList = (props:any):any =>{
     }
 
     return (
-        <AuthContextList.Provider value={{onOpen}}>
+        <AuthContextList.Provider value={{onOpen,taskList,handleDelete,handleEdit}}>
             {props.children}
             <Modalize
                 ref={modalizeRef}

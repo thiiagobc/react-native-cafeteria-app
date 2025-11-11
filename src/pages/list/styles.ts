@@ -51,6 +51,14 @@ export const style = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         gap:10,
+    },
+    button:{
+        backgroundColor:'red',
+        justifyContent:'center',
+        alignItems:'center',
+        width:100,
+        marginVertical:10,
+        borderRadius:10,
     }
     
 })

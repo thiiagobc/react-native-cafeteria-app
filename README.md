@@ -36,7 +36,8 @@ O aplicativo foi construído em **React Native (Expo)** e faz parte do meu **por
 - [x] Implementação da **transição entre páginas**  
 - [x] Organização da **navegação principal** entre botões e telas  
 - [x] Criação do **modal** com exibição de **data e hora**  
-- [ ] Configurar o modal para funcionar como **carrinho de compras**  
+- [x] Adicionadas funções de **salvar, editar e excluir tarefas** dentro do modal  
+- [ ] Evoluir o modal para funcionar como **carrinho de compras** (itens da cafeteria)  
 - [ ] Implementar tela **“Minha Conta”** com informações do usuário  
 - [ ] Adicionar tela **principal** com listagem de produtos da cafeteria  
 - [ ] Aplicar tema visual completo (cores caramelo, marrom café e creme)  
@@ -92,12 +93,10 @@ Na raiz do projeto estão os arquivos principais de configuração (`app.json`, 
 
 ## 🚀 Como Executar o Projeto
 
-```
-## 🚀 Como Executar o Projeto
-
 > ⚙️ Antes de iniciar, verifique as [dependências necessárias](./DEPENDENCIAS.md).
 
-> Iniciar o projeto no Terminal
+```
+# Iniciar o projeto no Terminal
 npx expo start
 ```
 
@@ -112,6 +111,7 @@ npx expo start
 | 🧱 **v0.1.0** | Estrutura base do app | ✅ Concluída |
 | 🔐 **v0.2.0** | Tela de login com componente Input | ✅ Concluída |
 | 🔄 **v0.3.0** | Navegação entre telas, modal e transições | ✅ Concluída |
+| 🗂️ **v0.3.1** | Modal com salvar, editar e excluir tarefas | ✅ Concluída |
 | 🛒 **v0.4.0** | Implementação do carrinho de compras (modal funcional) | 🚧 Em andamento |
 | 🎨 **v0.5.0** | Estilização completa e telas de Minha Conta / Produtos | ⏳ A planejar |
 | 📱 **v1.0.0** | Publicação final e README completo | ⏳ A planejar |
@@ -123,7 +123,7 @@ Este aplicativo simula uma **cafeteria mobile**, permitindo explorar conceitos d
 - Componentização e reutilização de código  
 - Navegação e rotas no React Native  
 - Gerenciamento de estado  
-- Criação de modais e interações dinâmicas  
+- Criação de modais e interações dinâmicas (com salvar, editar e excluir itens)  
 - Boas práticas de estilização e organização visual  
 
 O foco principal é o **aprendizado progressivo**, com commits e versões que contam a **história de evolução do código**, desde a estrutura base até o comportamento real de um app completo de cafeteria.
